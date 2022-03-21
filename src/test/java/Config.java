@@ -1,3 +1,4 @@
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -13,6 +14,7 @@ public class Config {
             .setAccept(ContentType.JSON)
             .setBaseUri(BaseUri)
             .setBasePath(postsApiUrl)
+            .addFilter(new AllureRestAssured())
             .build();
 
     public static ResponseSpecification responseSpecification = new ResponseSpecBuilder()
