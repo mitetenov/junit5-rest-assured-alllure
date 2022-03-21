@@ -1,6 +1,11 @@
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +21,8 @@ public class TestPostAdding {
 
     static String id;
     @Test
+    @DisplayName("добавляем пост")
+    @Description("добавляем пост и проверяем, что в ответе пришли все поля, заполненные нами + идентификатор поста")
     @Order(1)
     public void postCreating(){
         id = given(Config.posts)
@@ -39,6 +46,8 @@ public class TestPostAdding {
     }
 
     @Test
+    @DisplayName("проверяем пост")
+    @Description("проверяем, что добавленный пост можно получить")
     @Order(2)
     public void createdPostCheck(){
         given(Config.posts)

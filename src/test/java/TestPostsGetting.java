@@ -1,9 +1,7 @@
+import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
@@ -16,6 +14,8 @@ public class TestPostsGetting {
     }
 
     @Test
+    @DisplayName("проверяем длинну коллекции")
+    @Description("в запросе должно приходить 100 постов")
     public void checkCollectionLength() {
         given(Config.posts)
                 .when()
@@ -26,6 +26,8 @@ public class TestPostsGetting {
                 .body("size()", is(100));
     }
     @Test
+    @DisplayName("проверяем, что в ответе приходят все поля")
+    @Description("должно прийти 4 поля: userId, id, title и body")
     public void checkField() {
         given(Config.posts)
                 .when()
