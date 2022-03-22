@@ -1,4 +1,5 @@
 import io.qameta.allure.Description;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
@@ -8,18 +9,18 @@ import static org.hamcrest.core.Is.is;
 public class TestPostsGetting {
     @BeforeAll
     public static void enableLogger() {
-        Config.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
     @DisplayName("проверяем длинну коллекции")
     @Description("в запросе должно приходить 100 постов")
     public void checkCollectionLength() {
-        given(Config.posts)
+        given(DefaultRequestSpecs.defaultRequestSpec)
                 .when()
                 .get()
                 .then()
-                .spec(Config.responseSpecification)
+                .spec(DefaultResponseSpecs.defaultResponseSpecification)
                 .assertThat()
                 .body("size()", is(100));
     }
@@ -28,11 +29,11 @@ public class TestPostsGetting {
     @DisplayName("проверяем, что в ответе приходят все поля")
     @Description("должно прийти 4 поля: userId, id, title и body")
     public void checkField() {
-        given(Config.posts)
+        given(DefaultRequestSpecs.defaultRequestSpec)
                 .when()
                 .get()
                 .then()
-                .spec(Config.responseSpecification)
+                .spec(DefaultResponseSpecs.defaultResponseSpecification)
                 .assertThat()
                 .body("[0].userId", is(1))
                 .assertThat()
