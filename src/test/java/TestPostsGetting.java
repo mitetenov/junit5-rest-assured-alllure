@@ -1,6 +1,4 @@
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.LogDetail;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
@@ -9,8 +7,8 @@ import static org.hamcrest.core.Is.is;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestPostsGetting {
     @BeforeAll
-    public static void enableLoggingOfRequestAndResponseIfValidationFails() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
+    public static void enableLogger() {
+        Config.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @Test
@@ -25,6 +23,7 @@ public class TestPostsGetting {
                 .assertThat()
                 .body("size()", is(100));
     }
+
     @Test
     @DisplayName("проверяем, что в ответе приходят все поля")
     @Description("должно прийти 4 поля: userId, id, title и body")

@@ -1,9 +1,4 @@
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
@@ -13,13 +8,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.Is.is;
 
 public class TestPostAdding {
-
+    static String id;
     @BeforeAll
-    public static void enableLoggingOfRequestAndResponseIfValidationFails() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
+    public static void enableLogger() {
+        Config.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    static String id;
     @Test
     @DisplayName("добавляем пост")
     @Description("добавляем пост и проверяем, что в ответе пришли все поля, заполненные нами + идентификатор поста")
@@ -27,11 +21,12 @@ public class TestPostAdding {
     public void postCreating(){
         id = given(Config.posts)
                 .when()
-                .body("{\n" +
-                        "    \"title\": \"заголовок\",\n" +
-                        "    \"body\": \"тело\",\n" +
-                        "    \"userId\": \"1\"\n" +
-                        "}")
+                .body("""
+                        {
+                            "title": "заголовок",
+                            "body": "тело",
+                            "userId": "1"
+                        }""")
                 .post()
                 .then()
                 .assertThat()
