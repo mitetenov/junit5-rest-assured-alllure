@@ -7,11 +7,12 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public class DefaultRequestSpecification {
+
     public static RequestSpecification defaultRequestSpec = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)
             .setAccept(ContentType.JSON)
             .setBaseUri(Common.BaseUri)
-            .setBasePath(Common.POSTS)
+            .setBasePath(Common.API)
             .addFilter(new AllureRestAssured())
             .build();
 }
