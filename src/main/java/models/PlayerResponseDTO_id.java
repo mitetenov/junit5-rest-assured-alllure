@@ -1,3 +1,6 @@
+// that DTO exist because /api/automationTask/create response with _id key, but /api/automationTask/getAll and
+// /api/automationTask/getOne resposne with id key
+
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

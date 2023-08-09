@@ -1,5 +1,3 @@
-package common;
-
 import api.AuthenticationApi;
 import configs.Common;
 import models.CredentialsDTO;

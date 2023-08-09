@@ -1,8 +1,5 @@
-package post;
-
 import api.AuthenticationApi;
 import api.PlayersApi;
-import common.BaseTest;
 import configs.Common;
 import io.restassured.response.Response;
 import models.*;
@@ -19,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-public class RequestsTest extends BaseTest {
+public class TestslotegratorTest extends BaseTest {
     static List<PlayerResponseDTO_id> listOfCreatedUsers = new ArrayList<>();
 
     @Test
@@ -29,7 +26,8 @@ public class RequestsTest extends BaseTest {
         AuthenticationApi authenticationApi = new AuthenticationApi();
         CredentialsDTO credentialsDTO = new CredentialsDTO(Common.LOGIN, Common.PASSWORD);
         Response response = authenticationApi.login(credentialsDTO);
-        assertEquals(200, response.getStatusCode());
+        assertEquals(200, response.getStatusCode()); //failed because in expected part of task wrote,
+        // that expected is 200, but actual is 201
     }
 
     @Test
@@ -70,7 +68,8 @@ public class RequestsTest extends BaseTest {
             PlayerRequestOneDTO player = new PlayerRequestOneDTO();
             player.setEmail(playerResponseDTO.getEmail());
             Response response = playersApi.getOne(player, token);
-            assertEquals(200, response.getStatusCode());
+            assertEquals(200, response.getStatusCode()); //failed because in expected part of task wrote,
+            // that expected is 200, but actual is 201
         }
     }
 
